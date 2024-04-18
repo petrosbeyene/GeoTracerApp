@@ -3,6 +3,8 @@ export type RootStackParamList = {
     SignIn: undefined;
     SignUp: undefined;
     EmailVerification: undefined;
+    PasswordResetRequest: undefined;
+    PasswordResetConfirm: undefined;
     LocationTracker: undefined;
   };
   

@@ -35,3 +35,11 @@ def redirect_to_app(request):
         return HttpResponse("Token is required", status=400)
     deep_link_url = f'exp://192.168.99.209:8081/--/confirm-email?token={token}'
     return SafeCustomSchemeRedirect(deep_link_url)
+
+def password_reset_confirm(request, uidb64, token):
+    if not token:
+        return HttpResponse("Token is required", status=400)
+    if not uidb64:
+        return HttpResponse("UserId is required", status=400)
+    password_reset_deeplink_url = f"exp://192.168.99.209:8081/--/reset-password/{uidb64}/{token}/"
+    return SafeCustomSchemeRedirect(password_reset_deeplink_url)

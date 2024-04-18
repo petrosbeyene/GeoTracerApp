@@ -20,6 +20,13 @@ interface UserRegistration {
     last_name: string;
 }
 
+interface ConfirmPasswordReset {
+  uidb64: string;
+  token: string;
+  new_password1: string;
+  new_password2: string;
+}
+
 export const authService = api.injectEndpoints({
   endpoints: (builder) => ({
     register: builder.mutation<UserRegistration, UserRegistration>({
@@ -42,13 +49,29 @@ export const authService = api.injectEndpoints({
         method: 'POST',
       }),
     }),
-    verifyEmail: builder.mutation({
+    verifyEmail: builder.mutation<void, { token: string }>({
       query: (token) => ({
         url: `users/registration/account-confirm-email/${token}/`,
         method: 'GET',
       }),
     }),
+    passwordReset: builder.mutation<void, { email: string }>({
+      query: (email) => ({
+        url: 'dj-rest-auth/password/reset/',
+        method: 'POST',
+        body: email,
+      })
+    }),
+    confirmPasswordReset: builder.mutation({
+      query: (data) => ({
+        url: 'dj-rest-auth/password/reset/confirm/',
+        method: 'POST',
+        body: data,
+      }),
+    }),
   }),
 });
 
-export const { useRegisterMutation, useLoginMutation, useLogoutMutation, useVerifyEmailMutation } = authService;
+export const { useRegisterMutation, useLoginMutation, useLogoutMutation, 
+                useVerifyEmailMutation, usePasswordResetMutation,
+                useConfirmPasswordResetMutation} = authService;

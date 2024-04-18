@@ -24,6 +24,12 @@ const HomeScreen: React.FC = () => {
                     onPress={() => navigation.navigate('SignUp')}
                     color="#007BFF"
                 />
+                <View style={styles.buttonSpacer} />
+                <Button
+                    title="Password Reset"
+                    onPress={() => navigation.navigate('PasswordResetRequest')}
+                    color="#007BFF"
+                />
             </View>
         </View>
     );

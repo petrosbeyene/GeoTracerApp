@@ -20,9 +20,9 @@ const EmailVerification: React.FC = () => {
             console.log("Parsed link data:", data);
             if (data.path === 'confirm-email' && data.queryParams?.token) {
                 console.log("Token received:", data.queryParams.token);
-                verifyEmail(data.queryParams.token)
+                verifyEmail(data.queryParams.token as any)
                 .unwrap()
-                .then((response) => console.log('Success response:', response.status))
+                .then((response) => console.log('Success response:', response))
                 .catch((error) => console.log('Error response:', error));
             }
         }
