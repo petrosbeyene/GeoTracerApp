@@ -3,6 +3,7 @@
     "name": "GeoTracer-Frontend",
     "slug": "GeoTracer-Frontend",
     "version": "1.0.0",
+    "scheme": "GeoTracer",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",

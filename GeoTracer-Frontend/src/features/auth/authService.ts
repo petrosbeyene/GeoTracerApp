@@ -7,7 +7,7 @@ interface UserSigninCredentials {
     password: string;
 }
 
-interface UserSigninReturn {
+interface LoginResponse {
     access: string;
 }
 
@@ -29,7 +29,7 @@ export const authService = api.injectEndpoints({
         body: user,
       }),
     }),
-    login: builder.mutation<UserSigninCredentials, UserSigninCredentials>({
+    login: builder.mutation<LoginResponse, UserSigninCredentials>({
       query: (credentials) => ({
         url: 'dj-rest-auth/login/',
         method: 'POST',
@@ -42,7 +42,13 @@ export const authService = api.injectEndpoints({
         method: 'POST',
       }),
     }),
+    verifyEmail: builder.mutation({
+      query: (token) => ({
+        url: `users/registration/account-confirm-email/${token}/`,
+        method: 'GET',
+      }),
+    }),
   }),
 });
 
-export const { useRegisterMutation, useLoginMutation, useLogoutMutation } = authService;
+export const { useRegisterMutation, useLoginMutation, useLogoutMutation, useVerifyEmailMutation } = authService;

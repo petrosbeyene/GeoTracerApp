@@ -1,6 +1,8 @@
 from django.urls import path
-from users.views import CustomRegistrationView
+from users.views import CustomRegistrationView, CustomConfirmEmailView, redirect_to_app
 
 urlpatterns = [
     path('register/', CustomRegistrationView.as_view(), name='custom_register'),
+    path('registration/account-confirm-email/<str:key>/', CustomConfirmEmailView.as_view(), name='account_confirm_email'),
+    path('confirm-email/', redirect_to_app, name='redirect_to_app'),
 ]

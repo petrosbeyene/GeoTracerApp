@@ -5,6 +5,8 @@ import * as Yup from 'yup';
 import { useNavigation } from '@react-navigation/native';
 import { useLoginMutation } from '../authService';
 import { saveToken, getToken } from '../../../utils/authToken';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../../types';
 
 // Validation schema
 const SignInSchema = Yup.object().shape({
@@ -12,9 +14,11 @@ const SignInSchema = Yup.object().shape({
   password: Yup.string().required('Password is required'),
 });
 
+type SignInNavigationProp = NativeStackNavigationProp<RootStackParamList, 'SignIn'>;
+
 const SignInScreen: React.FC = () => {
   const [login, { isLoading, isError, error }] = useLoginMutation();
-  const navigation = useNavigation();
+  const navigation = useNavigation<SignInNavigationProp>();
 
   const handleFormSubmit = async (values: any) => {
     try {
@@ -22,13 +26,13 @@ const SignInScreen: React.FC = () => {
       if (data && data.access) {
         await saveToken(data.access);
         Alert.alert('Login Success', 'You are successfully logged in!');
-        // Optional: Navigate to another screen
-        // navigation.navigate('HomeScreen');
-        const token = await getToken(); // Ensure you await the token
+        navigation.navigate('LocationTracker');
+        const token = await getToken();
         console.log(token);
       }
     } catch (err) {
-      Alert.alert('Login Failed', 'Invalid email or password');
+      Alert.alert('Login Failed', ' ' + err);
+      console.log(err)
     }
   };
 

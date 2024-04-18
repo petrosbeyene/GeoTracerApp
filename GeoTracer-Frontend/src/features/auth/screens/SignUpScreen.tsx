@@ -7,7 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../../types';
 
-type HomeNavigationProp = NativeStackNavigationProp<RootStackParamList, 'SignUp'>;
+type SignUpNavigationProp = NativeStackNavigationProp<RootStackParamList, 'SignUp'>;
 
 
 const SignUpSchema = Yup.object().shape({
@@ -25,7 +25,7 @@ const SignUpSchema = Yup.object().shape({
 
 const SignUpScreen: React.FC = () => {
     const [register, { isLoading, isSuccess, isError, error }] = useRegisterMutation();
-    const navigation = useNavigation<HomeNavigationProp>();
+    const navigation = useNavigation<SignUpNavigationProp>();
 
     const handleFormSubmit = async (values: any) => {
         try {
@@ -37,8 +37,8 @@ const SignUpScreen: React.FC = () => {
             first_name: values.firstName,
             last_name: values.lastName,
           }).unwrap();
-          Alert.alert('Success', 'You have registered successfully');
-          navigation.navigate('SignIn');
+          Alert.alert('Success', 'You have registered successfully, and verification email is sent to your inbox!');
+          // navigation.navigate('SignIn');
           console.log(values)
         } catch (err) {
           Alert.alert('Error', 'Failed to register: ' + err);
