@@ -51,6 +51,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'dj_rest_auth',
     'dj_rest_auth.registration',
+    'django_celery_beat',
+    'django_celery_results',
 
     # for token management
     'rest_framework_simplejwt',
@@ -166,6 +168,10 @@ EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_PASSWORD")
 EMAIL_PORT = 587
 
 ACCOUNT_ADAPTER = 'users.adapters.custom_email_adapter.CustomEmailAdapter'
+
+
+CELERY_RESULT_BACKEND = "django-db"
+CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_REDIS_URL', 'redis://127.0.0.1:6379')
 
 # dj-rest-auth and django-allauth settings
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
