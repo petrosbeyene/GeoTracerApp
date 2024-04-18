@@ -5,14 +5,14 @@ import { useVerifyEmailMutation } from '../authService';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../../types';
-import { useBetterURL } from '../../../hooks/useBetterURL';
+import { useURL } from '../../../hooks/urlProvider';
 
 type EmailVerificaitonNavigationProp = NativeStackNavigationProp<RootStackParamList, 'EmailVerification'>;
 
 const EmailVerification: React.FC = () => {
     const navigation = useNavigation<EmailVerificaitonNavigationProp>();
     const [verifyEmail, { isLoading, isSuccess, isError }] = useVerifyEmailMutation();
-    const url = useBetterURL();
+    const url = useURL();
     
     useEffect(() => {
         if (url) {

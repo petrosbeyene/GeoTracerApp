@@ -11,6 +11,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { RootStackParamList } from './src/types';
 import * as Linking from 'expo-linking';
 import { Text } from 'react-native';
+import { UrlProvider } from './src/hooks/urlProvider';
 
 const prefix = Linking.createURL('/');
 
@@ -32,6 +33,7 @@ function App() {
 
     return (
         <Provider store={store}>
+            <UrlProvider>
             <NavigationContainer linking={linking} fallback={<Text>Loading...</Text>}>
                 <Stack.Navigator initialRouteName="HomeScreen">
                     <Stack.Screen name="HomeScreen" component={HomeScreen} options={{title: 'GeoTracer'}} />
@@ -41,6 +43,7 @@ function App() {
                     <Stack.Screen name="LocationTracker" component={LocationTrackingScreen} />
                 </Stack.Navigator>
             </NavigationContainer>
+            </UrlProvider>
         </Provider>
     );
 }
