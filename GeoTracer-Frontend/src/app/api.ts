@@ -1,23 +1,3 @@
-// import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-// import { getToken } from '../utils/authToken';
-
-// const api = createApi({
-//   reducerPath: 'api',
-//   baseQuery: fetchBaseQuery({ 
-//       baseUrl: 'http://192.168.99.209:8000/api/v1/',
-//       prepareHeaders: async (headers) => {
-//         const token = await getToken();
-//         if (token) {
-//           headers.set('Authorization', `Bearer ${token}`);
-//         }
-//         return headers;
-//       },
-//    }),
-//   endpoints: (builder) => ({}),
-// });
-
-// export default api;
-
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import * as SecureStore from 'expo-secure-store';
 
